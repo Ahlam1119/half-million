@@ -1,0 +1,97 @@
+
+<header style="background-color: #fcf5ea; padding: 10px 20px;">
+  <nav class="d-flex justify-content-between align-items-center">
+    <ul class="d-flex list-unstyled mb-0">
+      <li class="p-2" style="font-size: 22px; color: #73c79d;">
+        <a href="https://www.linkedin.com/company/halfmillion/" target="_blank" style="color: inherit; text-decoration: none;">
+          <i class="bi bi-linkedin"></i>
+        </a>
+      </li>
+      <li class="p-2" style="font-size: 22px; color: #73c79d;">
+        <a href="https://www.instagram.com/halfmillionuk?igsh=MzRlODBiNWFlZA==" target="_blank" style="color: inherit; text-decoration: none;">
+          <i class="bi bi-instagram"></i>
+        </a>
+      </li>
+      <li class="p-2" style="font-size: 22px; color: #73c79d;">
+        <a href="https://x.com/halfmillion_sa?s=21&t=hcc48wwushroOOkOGW53Xg" target="_blank" style="color: inherit; text-decoration: none;">
+          <i class="bi bi-twitter-x"></i>
+        </a>
+      </li>
+      <li class="p-2" style="font-size: 22px; color: #73c79d;">
+        <a href="https://www.tiktok.com/@halfmillion_sa?_t=ZS-8uBsvF7SiUn&_r=1" target="_blank" style="color: inherit; text-decoration: none;">
+          <i class="bi bi-tiktok"></i>
+        </a>
+      </li>
+    </ul>
+    
+    
+    
+    <div class="text-center w-100">
+      <h1 class="text-black fw-bold">½M</h1>
+    </div>
+    <button class="btn d-flex align-items-center" (click)="toggleCart()">
+      <i class="bi bi-bag-fill" style="font-size: 24px; color: #73c79d ;"></i>
+      <span class="badge" > {{ setcounter }}</span>
+    </button>
+  </nav>
+</header> 
+
+  <!--
+سلة المشتريات -->
+<div class="cart-dropdown" *ngIf="cartOpen"
+  style="position: absolute; top: 60px; left: 10px; background-color: white; border: 1px solid #ccc; padding: 20px; z-index: 1000; width: 500px; height: auto;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4" style="background-color: #fdfaf5; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); width: 100%; height: auto;">
+
+      <div class="modal-header border-bottom pb-3 text-center w-100">
+        <h5 class="modal-title fw-bold mx-auto" id="cartModalLabel" style="color: #000; font-size: 1.7rem;">سلة منتجاتك</h5>
+      </div>
+
+      <div class="modal-body">
+        <div *ngIf="cartItems.length === 0" class="text-center text-muted">
+          السلة فارغة
+        </div>
+
+        <div *ngIf="cartItems.length > 0">
+          <ul class="list-unstyled">
+            <li *ngFor="let item of cartItems; let i = index" 
+    class="p-3 mb-3 rounded d-flex justify-content-between align-items-center"
+    style="background: #fff; border-left: 4px solid #73c79d; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+
+  <div class="d-flex justify-content-between w-100">
+    <div class="d-flex flex-column">
+      <strong class="d-block text-black" style="font-size: 1.2rem;">{{ item.product.name }}</strong>
+      <small class="text-muted" style="font-size: 1rem;">{{ item.size }}</small>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between" style="min-width: 150px;">
+      <span class=" text-black" style="font-size: 1rem;">{{ item.totalPrice | currency: 'SAR ' }}</span>
+      <div class="d-flex align-items-center">
+        <button class="btn btn-outline-secondary btn-sm me-2" (click)="decreaseCartQuantity(item, i)">-</button>
+        <span class=" text-black mx-2" style="font-size: 1rem;">{{ item.quantity }}</span>
+        <button class="btn btn-outline-secondary btn-sm ms-2" (click)="increaseCartQuantity(item, i)">+</button>
+      </div>
+    </div>
+  </div>
+</li>
+          </ul>
+          <div class="text-end  text-center mt-3 w-100" style="font-size: 1.4rem;">
+            الإجمالي: <span class="text-black">{{ getTotalPrice() | currency: 'SAR ' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer border-top pt-3 d-flex justify-content-center w-100 gap-3">
+        <!-- <button type="button" class="btn px-4" (click)="checkout()" style="background-color: #73c79d; border-radius: 5px;">إتمام الشراء</button> -->
+        <button type="button" class="btn px-4" (click)="goToThankYouPage()" style="background-color: #73c79d; border-radius: 5px;">إتمام الشراء</button>
+        <button type="button" class="btn px-4" (click)="cartOpen = false"  style="background-color: #73c79d;">إغلاق</button>
+      </div>
+      
+      
+    </div>
+  </div>
+</div> 
+
+ 
+
+

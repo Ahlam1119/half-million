@@ -1,0 +1,20 @@
+<app-header></app-header>
+
+
+<div class="container">
+    <div class="table-container">
+      <img src="img/lavendercup.jpg" class="lavender-image">
+      <div class="menu-title mt-3">القائمة</div>
+      <div class="card-container">
+        <div class="card" style="background-color: #fcf5ea;" *ngFor="let category of categories" (click)="navigateTo(category.link)">
+          <img [src]="category.image" alt="{{ category.name }}" class="product-image">
+          <div class="card-label">{{ category.name }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<app-footer></app-footer>
+
+
+
